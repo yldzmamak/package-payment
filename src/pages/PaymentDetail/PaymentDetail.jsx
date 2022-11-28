@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // components
 import { Col, Row, Form } from 'antd';
-import { Card, PackageLabel, Button, Input } from '../../components';
+import { Card, PackageLabel, Button, Input, TimeInput, CreditNumberInput } from '../../components';
 
 //redux
 import { useSelector, useDispatch } from 'react-redux';
@@ -16,17 +16,20 @@ import './payment.scss';
 
 const PaymentDetail = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(paymentAction.getPaymentContent());
   }, [dispatch]);
 
+  const [form] = Form.useForm();
+  const [cardNumber, setCardNumber] = useState('');
+  const [date, setDate] = useState('');
+
   const packages = useSelector(({ packages }) =>
     packages.data.filter(item => item.selected === true),
   );
   const content = useSelector(({ payment }) => payment?.data?.content);
-
-  const navigate = useNavigate();
 
   const pay = async values => {
     await dispatch(paymentAction.payment(values));
@@ -35,10 +38,16 @@ const PaymentDetail = () => {
 
   const validateMessages = {
     required: 'Zorunlu Alan',
-    types: {
-      email: 'Geçersiz E-Mail',
-    },
   };
+
+  const handleInput = ({ target: { value } }) => setCardNumber(value);
+  const handleInputCVV = ({ target: { value } }) => {
+    form.setFieldsValue({
+      cvv: `${'*'.repeat(value.length)}`,
+    });
+  };
+
+  const handleInputTime = ({ target: { value } }) => setDate(value);
 
   return (
     <Row className="payment-container">
@@ -51,64 +60,71 @@ const PaymentDetail = () => {
             size="large"
             id="my-form"
             layout={'vertical'}
+            form={form}
             validateMessages={validateMessages}
             onFinish={pay}
           >
-            <Col xs={24} md={12} className="column">
-              <Form.Item
-                name={'cardHolderName'}
-                label="Kart Üzerindeki İsim Soyisim"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Input size={'large'} maxLength={255} />
-              </Form.Item>
-            </Col>
+            {(values, formInstance) => {
+              return (
+                <>
+                  <Col xs={24} md={12} className="column">
+                    <Form.Item
+                      name={'cardHolderName'}
+                      label="Kart Üzerindeki İsim Soyisim"
+                      rules={[
+                        {
+                          required: true,
+                        },
+                      ]}
+                    >
+                      <Input size={'large'} />
+                    </Form.Item>
+                  </Col>
 
-            <Row>
-              <Col xs={24} md={12} className="column">
-                <Form.Item
-                  name={'cardNumber'}
-                  label="Kart Numarası"
-                  rules={[
-                    {
-                      required: true,
-                    },
-                  ]}
-                >
-                  <Input size={'large'} maxLength={16} />
-                </Form.Item>
-              </Col>
-              <Col xs={24} md={6} className="column">
-                <Form.Item
-                  name={'expireDate'}
-                  label="Son Kul. Tar."
-                  rules={[
-                    {
-                      required: true,
-                    },
-                  ]}
-                >
-                  <Input size={'large'} maxLength={5} />
-                </Form.Item>
-              </Col>
-              <Col xs={24} md={6} className="column">
-                <Form.Item
-                  name={'cvv'}
-                  label="CVV/CVC"
-                  rules={[
-                    {
-                      required: true,
-                    },
-                  ]}
-                >
-                  <Input size={'large'} maxLength={3} />
-                </Form.Item>
-              </Col>
-            </Row>
+                  <Row>
+                    <Col xs={24} md={12} className="column">
+                      <Form.Item
+                        name={'cardNumber'}
+                        label="Kart Numarası"
+                        rules={[{ required: true, minLength: 16 }]}
+                      >
+                        <CreditNumberInput value={cardNumber} onChange={handleInput}>
+                          {inputProps => <Input {...inputProps} />}
+                        </CreditNumberInput>
+                      </Form.Item>
+                    </Col>
+                    <Col xs={24} md={6} className="column">
+                      <Form.Item
+                        name={'expireDate'}
+                        label="Son Kul. Tar."
+                        rules={[
+                          {
+                            required: true,
+                          },
+                        ]}
+                      >
+                        <TimeInput value={date} onChange={handleInputTime}>
+                          {inputProps => <Input {...inputProps} />}
+                        </TimeInput>
+                      </Form.Item>
+                    </Col>
+                    <Col xs={24} md={6} className="column">
+                      <Form.Item
+                        name={'cvv'}
+                        label="CVV/CVC"
+                        rules={[
+                          {
+                            required: true,
+                          },
+                        ]}
+                      >
+                        <Input maxLength={3} onChange={handleInputCVV} size={'large'}></Input>
+                      </Form.Item>
+                    </Col>
+                  </Row>
+                </>
+              );
+            }}
           </Form>
           <div className="contract-container">
             <span className="title">Sözleşme</span>

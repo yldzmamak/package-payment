@@ -4,4 +4,6 @@ export { default as Input } from './Input/Input';
 export { default as Tag } from './Tag/Tag';
 export { default as PackageCard } from './PackageCard/PackageCard';
 export { default as PackageLabel } from './PackageLabel/PackageLabel';
+export { default as CreditNumberInput } from './InputMask/CreditNumberInput';
+export { default as TimeInput } from './InputMask/TimeInput';
 export { default as PrivateRoute } from './PrivateRoute/PrivateRoute';
