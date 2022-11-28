@@ -1,0 +1,14 @@
+.success-content {
+  margin: 40px;
+  text-align: center;
+
+  .icon-container {
+    margin: 40px;
+    display: flex;
+    justify-content: center;
+
+    .icon-success {
+      font-size: 70px;
+    }
+  }
+}

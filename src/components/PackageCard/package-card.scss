@@ -1,0 +1,40 @@
+.package-card-container {
+  border-radius: 10px;
+  background-color: #e5e5e5;
+  margin: 0 10px 10px 10px;
+
+  .image {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px 0 0 8px;
+  }
+
+  .package-container {
+    padding: 10px;
+    height: 100%;
+    .package-header {
+      display: flex;
+      justify-content: space-between;
+      .title {
+        font-weight: 700;
+        font-size: 20px;
+      }
+    }
+    .package-detail {
+      display: flex;
+      align-items: center;
+      i {
+        font-size: 5px;
+        border-radius: 50%;
+        outline: auto gray;
+      }
+      .detail {
+        margin-left: 5px;
+      }
+    }
+  }
+}
+
+.selected {
+  border: 2px solid #7AC500;
+}
