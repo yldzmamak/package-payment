@@ -1,0 +1,40 @@
+// https://chir.ag/projects/name-that-color/
+
+/* Color Variables */
+$white: #ffffff;
+$concretecolor: #f2f2f2;
+
+/* Screen Dimensions*/
+$screen-xs: 320px;
+$screen-xs-min: $screen-xs;
+$screen-phone: $screen-xs-min;
+
+$screen-sm: 768px;
+$screen-sm-min: $screen-sm;
+$screen-tablet: $screen-sm-min;
+
+$screen-m: 991px;
+$screen-m-min: $screen-m;
+$screen-xs-tablet: $screen-m-min;
+
+$screen-md: 1024px;
+$screen-md-min: $screen-md;
+$screen-desktop: $screen-md-min;
+
+$screen-lg: 1366px;
+$screen-lg-min: $screen-lg;
+$screen-lg-desktop: $screen-lg-min;
+
+$screen-xlg: 1600px;
+$screen-xlg-min: $screen-xlg;
+$screen-xlg-desktop: $screen-xlg-min;
+
+$screen-xs-max: ($screen-sm-min - 1);
+$screen-sm-max: ($screen-md-min - 1);
+$screen-md-max: ($screen-lg-min - 1);
+$screen-m-max: ($screen-m-min - 1);
+
+$screen-phone-max: ($screen-sm-min - 1);
+$screen-tablet-max: ($screen-md-min - 1);
+$screen-desktop-max: ($screen-lg-min - 1);
+$screen-l-desktop-max: ($screen-xlg-min - 1);

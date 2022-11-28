@@ -1,5 +1,7 @@
+@import '../../scss/variables.scss';
+
 .app-header {
-  background-color: white !important;
+  background-color: $white !important;
   min-height: 10vh;
   display: flex;
   flex-direction: column;

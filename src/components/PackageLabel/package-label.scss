@@ -1,3 +1,5 @@
+@import '../../scss/variables.scss';
+
 .package-label-container {
   padding: 6px;
   display: flex;
@@ -6,5 +8,5 @@
   font-weight: 600;
   border-radius: 5px;
   justify-content: space-between;
-  background-color: #F2F2F2;
+  background-color: $concretecolor;
 }
