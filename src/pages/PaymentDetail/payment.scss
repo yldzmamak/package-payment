@@ -1,4 +1,8 @@
 .payment-container {
+  .contract-container {
+    margin-top: 30px;
+  }
+
   .title {
     font-weight: 500;
     font-size: 18px;
@@ -6,6 +10,14 @@
 
   .column {
     padding: 0 10px 0 10px;
+  }
+
+  .payment-form {
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    border: 1px solid #e1e1e1;
+    word-break: break-all;
   }
 
   .pay-button {

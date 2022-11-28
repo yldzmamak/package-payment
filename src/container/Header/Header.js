@@ -1,8 +1,13 @@
 import React from 'react';
-import { Layout } from 'antd';
-import './header.scss';
 
+//components
+import { Layout } from 'antd';
+
+// redux
 import { useSelector } from 'react-redux';
+
+// styles
+import './header.scss';
 
 const { Header: AntHeader } = Layout;
 

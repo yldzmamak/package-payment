@@ -10,12 +10,16 @@ const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk
 export { store };
  */
 
-import { applyMiddleware, compose, createStore } from 'redux';
-import thunk from 'redux-thunk';
+// persist
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
+// reducers
 import rootReducer from './modules/rootReducer';
+
+// redux
+import { applyMiddleware, compose, createStore } from 'redux';
+import thunk from 'redux-thunk';
 
 const persistConfig = {
   key: 'todolist-v2.0',

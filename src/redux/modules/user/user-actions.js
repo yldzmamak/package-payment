@@ -1,6 +1,8 @@
-// import api from '../../../utils/api';
-
+// types
 import * as actionTypes from '../user/user-type';
+
+// utils
+// import api from '../../../utils/api';
 
 export const signUp = user => async (dispatch, getState) => {
   dispatch({ type: actionTypes.ADD_USERS_REQUEST });

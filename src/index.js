@@ -1,12 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.scss';
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as RouterProvider } from 'react-router-dom';
+
+// persist
+import { PersistGate } from 'redux-persist/integration/react';
+
+//redux
 import { Provider as ReduxProvider } from 'react-redux';
 import { store, persistor } from './redux/configureStore';
-import { PersistGate } from 'redux-persist/integration/react';
+
+// router dom
+import { BrowserRouter as RouterProvider } from 'react-router-dom';
+
+// styles
+import './index.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

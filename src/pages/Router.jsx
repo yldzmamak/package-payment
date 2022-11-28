@@ -1,5 +1,7 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+
+// components
+import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
 
 // layouts
 import { PublicLayout, PrivateLayout } from '../layouts';
@@ -7,7 +9,8 @@ import { PublicLayout, PrivateLayout } from '../layouts';
 // pages
 import { PersonalInfo, PackageList, PaymentDetail, Success } from '../pages';
 
-import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
+//router dom
+import { Routes, Route } from 'react-router-dom';
 
 const Router = () => {
   return (

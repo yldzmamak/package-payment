@@ -1,6 +1,9 @@
 import React from 'react';
+
+// components
 import { Card } from '../../components';
 
+// styles
 import './success.scss';
 
 const Success = () => {

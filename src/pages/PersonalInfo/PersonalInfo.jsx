@@ -1,11 +1,18 @@
 import React from 'react';
+
+// components
 import { Button, Input, Card } from '../../components';
 import { Form } from 'antd';
 import { MailOutlined, UserOutlined } from '@ant-design/icons';
+
+//redux
 import { userAction } from '../../redux/modules';
 import { useDispatch } from 'react-redux';
+
+//router dom
 import { useNavigate } from 'react-router-dom';
 
+// styles
 import './personal-info.scss';
 
 const validateMessages = {
@@ -19,7 +26,7 @@ const PersonalInfo = () => {
   const navigate = useNavigate();
   let dispatch = useDispatch();
 
-  const signUp = async (values) => {
+  const signUp = async values => {
     await dispatch(userAction.signUp(values.user));
     navigate('/package-list');
   };

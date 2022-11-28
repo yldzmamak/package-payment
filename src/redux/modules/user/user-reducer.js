@@ -1,3 +1,4 @@
+// types
 import * as actionTypes from './user-type';
 
 const initialState = { data: null, isLoading: false, error: null };

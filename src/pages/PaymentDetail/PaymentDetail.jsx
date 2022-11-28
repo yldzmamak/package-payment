@@ -1,28 +1,43 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { useSelector } from 'react-redux';
+// components
+import { Col, Row, Form } from 'antd';
+import { Card, PackageLabel, Button, Input } from '../../components';
 
-import { Col, Row, message } from 'antd';
-import { Card, PackageLabel, Button } from '../../components';
+//redux
+import { useSelector, useDispatch } from 'react-redux';
+import { paymentAction } from '../../redux/modules';
+
+// router dom
 import { useNavigate } from 'react-router-dom';
 
+// styles
 import './payment.scss';
 
 const PaymentDetail = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(paymentAction.getPaymentContent());
+  }, [dispatch]);
+
   const packages = useSelector(({ packages }) =>
     packages.data.filter(item => item.selected === true),
   );
+  const content = useSelector(({ payment }) => payment?.data?.content);
 
   const navigate = useNavigate();
 
-  const pay = () => {
-    let selectedPackages = packages.some(item => item.selected);
-    selectedPackages
-      ? navigate('/success')
-      : message.open({
-          type: 'warning',
-          content: 'Ödemek için en az bir paket seçiniz.',
-        });
+  const pay = async values => {
+    await dispatch(paymentAction.payment(values));
+    navigate('/success');
+  };
+
+  const validateMessages = {
+    required: 'Zorunlu Alan',
+    types: {
+      email: 'Geçersiz E-Mail',
+    },
   };
 
   return (
@@ -30,6 +45,75 @@ const PaymentDetail = () => {
       <Col xs={24} md={15} className="column">
         <Card>
           <span className="title">Kart Bilgileri</span>
+          <Form
+            name="normal_login"
+            className="payment-form"
+            size="large"
+            id="my-form"
+            layout={'vertical'}
+            validateMessages={validateMessages}
+            onFinish={pay}
+          >
+            <Col xs={24} md={12} className="column">
+              <Form.Item
+                name={'cardHolderName'}
+                label="Kart Üzerindeki İsim Soyisim"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                <Input size={'large'} maxLength={255} />
+              </Form.Item>
+            </Col>
+
+            <Row>
+              <Col xs={24} md={12} className="column">
+                <Form.Item
+                  name={'cardNumber'}
+                  label="Kart Numarası"
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
+                >
+                  <Input size={'large'} maxLength={16} />
+                </Form.Item>
+              </Col>
+              <Col xs={24} md={6} className="column">
+                <Form.Item
+                  name={'expireDate'}
+                  label="Son Kul. Tar."
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
+                >
+                  <Input size={'large'} maxLength={5} />
+                </Form.Item>
+              </Col>
+              <Col xs={24} md={6} className="column">
+                <Form.Item
+                  name={'cvv'}
+                  label="CVV/CVC"
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
+                >
+                  <Input size={'large'} maxLength={3} />
+                </Form.Item>
+              </Col>
+            </Row>
+          </Form>
+          <div className="contract-container">
+            <span className="title">Sözleşme</span>
+            <div className="payment-form" dangerouslySetInnerHTML={{ __html: content }} />
+          </div>
         </Card>
       </Col>
       <Col xs={24} md={9} className="column">
@@ -42,7 +126,7 @@ const PaymentDetail = () => {
               </div>
             </Col>
           ))}
-          <Button type="primary" onClick={() => pay()} className="pay-button">
+          <Button form="my-form" htmlType="submit" type="primary" className="pay-button">
             Ödeme Yap
           </Button>
         </Card>

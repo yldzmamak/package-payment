@@ -1,6 +1,8 @@
-import api from '../../../utils/api';
-
+// types
 import * as actionTypes from '../packages/package-type';
+
+// utils
+import api from '../../../utils/api';
 
 export const getPackages = () => async (dispatch, getState) => {
   dispatch({ type: actionTypes.GET_PACKAGES_REQUEST });

@@ -1,10 +1,17 @@
-import { Col, Row, Divider, message } from 'antd';
 import { React, useEffect, useState } from 'react';
+
+// components
+import { Button, Card, PackageCard } from '../../components';
+import { Col, Row, Divider, message } from 'antd';
+
+//redux
 import { useDispatch, useSelector } from 'react-redux';
 import { packageAction } from '../../redux/modules';
-import { useNavigate } from 'react-router-dom';
-import { Button, Card, PackageCard } from '../../components';
 
+//router dom
+import { useNavigate } from 'react-router-dom';
+
+// styles
 import './package-list.scss';
 
 const PackageList = () => {
